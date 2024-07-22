@@ -6,10 +6,9 @@ import datetime
 
 def clean_market_cap(mc_str):
     mc_str = mc_str.replace('₽', '').replace(' ', '').replace(',', '').strip()
-    # Проверяем, содержит ли строка только допустимые символы (цифры и точка)
     if mc_str.replace('.', '', 1).isdigit():
-        return float(mc_str)  # Преобразуем в float
-    return None  # Если строка имеет некорректный формат
+        return float(mc_str)
+    return None
 
 
 def write_cmc_top():
@@ -22,7 +21,7 @@ def write_cmc_top():
         cols = row.find_all('td')
         if cols:
             name = cols[2].text.strip()
-            mc = cols[3].text.strip()  # Без начальной очистки, обработаем позже
+            mc = cols[3].text.strip()
             currencies.append({'name': name, 'mc': mc})
 
     total_market_cap = 0
